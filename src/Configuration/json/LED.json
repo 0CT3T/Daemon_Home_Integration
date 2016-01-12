@@ -1,0 +1,9 @@
+{
+    "JSONurl": "Configuration/LED.json",
+    "mode": 2,
+    "allmode": [
+        "ALLUMER",
+        "ETEINTE",
+        "BLINKER"
+    ]
+}
