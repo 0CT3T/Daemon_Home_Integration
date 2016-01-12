@@ -1,4 +1,4 @@
-from Module import Hardware
+from Module.Hardware import Hardware
 import json
 from Configuration.Modele import *
 
@@ -8,7 +8,7 @@ class LED(Hardware):
         super().__init__()
         self.allmode = ["ALLUMER","ETEINTE","BLINKER"]
         self.mode = 1
-        self.JSONurl = "Configuration/LED.json"
+        self.JSONurl = "Configuration/json/LED.json"
 
     def saveJSON(self):
         obj = json.dumps(self,default=jdefault,indent=4)
@@ -21,9 +21,13 @@ class LED(Hardware):
             JSON = fichier.read()
         self.__dict__= json.loads(JSON)
 
-    #run
+    #run pour utiliser le driver
+    #à implementer
     def run(self):
         print("LED")
+
+    def getname(self):
+        return self.__name__
 
     def getallmode(self):
         return self.allmode

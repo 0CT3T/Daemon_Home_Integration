@@ -12,6 +12,9 @@ class Hardware:
         else:
             pass
 
+    def getname(self):
+        pass
+
     def saveJSON(self):
         pass
 
@@ -19,6 +22,9 @@ class Hardware:
         pass
 
     def run(self):
+        pass
+
+    def getdata(self):
         pass
 
     def getallmode(self):

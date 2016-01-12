@@ -1,4 +1,4 @@
-from Module import Hardware
+from Module.Hardware import Hardware
 
 
 class PIR(Hardware):
