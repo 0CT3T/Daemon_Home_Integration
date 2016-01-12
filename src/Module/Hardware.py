@@ -1,6 +1,8 @@
 #import section
 
 
+
+
 class Hardware:
 
     #constructeur
@@ -10,5 +12,20 @@ class Hardware:
         else:
             pass
 
+    def saveJSON(self):
+        pass
+
+    def loadJSON(self):
+        pass
+
     def run(self):
+        pass
+
+    def getallmode(self):
+        pass
+
+    def getmode(self):
+        pass
+
+    def setmode(self,value):
         pass
