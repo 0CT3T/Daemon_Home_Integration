@@ -17,4 +17,7 @@ class configuration():
     def getlitem(self):
         return self.litem
 
+    def getlrules(self):
+        return self.lrules
+
 

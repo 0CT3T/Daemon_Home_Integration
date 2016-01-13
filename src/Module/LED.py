@@ -24,7 +24,7 @@ class LED(Hardware):
     #run pour utiliser le driver
     #à implementer
     def run(self):
-        print("LED")
+        print(self.mode)
 
     def getname(self):
         return self.__name__

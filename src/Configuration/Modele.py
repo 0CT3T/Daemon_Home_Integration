@@ -1,7 +1,11 @@
 from Configuration.configuration import configuration
 
-config = configuration()
 
+# variable global
+lobjet = {}  #liste des classes
+lmodrules = [] #liste des modules de regle
+lrules = []  #liste de regle
+config = configuration()
 
 #methode globale
 

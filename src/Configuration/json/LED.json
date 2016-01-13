@@ -4,6 +4,6 @@
         "ETEINTE",
         "BLINKER"
     ],
-    "mode": 2,
+    "mode": 0,
     "JSONurl": "Configuration/json/LED.json"
 }
