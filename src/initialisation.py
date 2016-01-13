@@ -14,17 +14,18 @@ with open("Configuration/json/module.json", "r") as fichier:
 config.load(JSON)
 
 # variable global
-lmodule = [] #liste des modules
-lobjet = []  #liste des classes
+lobjet = {}  #liste des classes
+lmodrules = [] #liste des modules de regle
+lrules = []  #liste de regle
 
-#import des classes
+#import des classes et objet
 for item in config.getlitem():
-    lmodule.append(getattr(SourceFileLoader(item,sys.path[0]+ "/Module/"+item+".py").load_module(), item))
+    temp = getattr(SourceFileLoader(item,sys.path[0]+ "/Module/"+item+".py").load_module(), item)
+    lobjet[item] = temp()
 
 
-#Creation des classes
-for module in lmodule:
-    lobjet.append(module())
+
+
 
 
 

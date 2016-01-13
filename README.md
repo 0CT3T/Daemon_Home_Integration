@@ -20,4 +20,6 @@ A faire:
 * Ajout des autres modules
 * fichier JSON specifique aux modules
 * loader tous les fichiers dans module au lieu d'un fichier
-
+* Ajout des regles
+* Ajout du Daemon
+* check update

@@ -5,6 +5,7 @@ class configuration():
 
     def __init__(self,*args, **kwargs):
         self.litem = []
+        self.lrules = []
         if len(args) == 0:
             pass
         else:
