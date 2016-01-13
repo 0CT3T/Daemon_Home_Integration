@@ -7,7 +7,7 @@ class LED(Hardware):
     def __init__(self):
         super().__init__()
         self.allmode = ["ALLUMER","ETEINTE","BLINKER"]
-        self.mode = 1
+        self.mode = "ETEINTE"
         self.JSONurl = "Configuration/json/LED.json"
 
     def saveJSON(self):
@@ -33,7 +33,8 @@ class LED(Hardware):
         return self.allmode
 
     def getmode(self):
-        return self.allmode[self.mode]
+        return self.mode
 
     def setmode(self,value):
         self.mode = value
+        self.saveJSON()
