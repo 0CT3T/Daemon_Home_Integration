@@ -1,4 +1,4 @@
-from Configuration.configuration import configuration
+from daemon.Configuration.configuration import configuration
 
 
 # variable global

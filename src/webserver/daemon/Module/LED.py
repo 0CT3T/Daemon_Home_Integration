@@ -1,6 +1,6 @@
-from Module.Hardware import Hardware
+from daemon.Module.Hardware import Hardware
 import json
-from Configuration.Modele import *
+from daemon.Configuration.Modele import *
 
 class LED(Hardware):
 
@@ -37,7 +37,7 @@ class LED(Hardware):
         return self.__name__
 
     def getfilename(self):
-        return 'LED.JSON'
+        return 'LED.json'
 
     def getallmode(self):
         return self.allmode

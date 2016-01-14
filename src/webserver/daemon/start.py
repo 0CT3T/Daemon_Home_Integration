@@ -6,6 +6,7 @@ from initialisation import *
 #
 ######################################
 
+print(lobjet["LED"].getJSON())
 
 #test des objets
 #for objet in lobjet.values():
@@ -25,5 +26,5 @@ while True:
     for objet in lobjet.values():
         objet.loadJSON()
         objet.run()
-
+    print(lobjet["LED"].getJSON())
 

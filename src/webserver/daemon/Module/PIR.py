@@ -1,4 +1,4 @@
-from Module.Hardware import Hardware
+from daemon.Module.Hardware import Hardware
 
 
 class PIR(Hardware):
