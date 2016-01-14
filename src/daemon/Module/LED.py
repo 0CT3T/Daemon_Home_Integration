@@ -11,14 +11,21 @@ class LED(Hardware):
         self.JSONurl = "Configuration/json/LED.json"
 
     def saveJSON(self):
-        obj = json.dumps(self,default=jdefault,indent=4)
+        bj = json.dumps(self,default=jdefault,indent=4)
         with open(self.JSONurl, "w") as fichier:
-            fichier.write(obj)
+            fichier.write(self.getJSON())
         return self.JSONurl
+
+    def getJSON(self):
+        obj = json.dumps(self,default=jdefault)
+        return obj
 
     def loadJSON(self):
         with open(self.JSONurl, "r") as fichier:
             JSON = fichier.read()
+        self.loadJSON(JSON)
+
+    def loadJSON(self,JSON):
         self.__dict__= json.loads(JSON)
 
     #run pour utiliser le driver
@@ -28,6 +35,9 @@ class LED(Hardware):
 
     def getname(self):
         return self.__name__
+
+    def getfilename(self):
+        return 'LED.JSON'
 
     def getallmode(self):
         return self.allmode

@@ -1,0 +1,13 @@
+
+from django.conf.urls import url, include
+from rest_framework import routers
+import views
+
+#router = routers.DefaultRouter()
+
+
+urlpatterns = [
+    #url(r'^', include(router.urls)),
+    url(r'^(?P<fichier>\D+)/(?P<json>.+)', views.home),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+]

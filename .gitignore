@@ -2,3 +2,4 @@
 gitcommit.sh
 gitupdate.sh
 myenv
+*.pyc

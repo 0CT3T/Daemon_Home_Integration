@@ -18,7 +18,16 @@ class Hardware:
     def saveJSON(self):
         pass
 
+    def getJSON(self):
+        pass
+
+    def getfilename(self):
+        pass
+
     def loadJSON(self):
+        pass
+
+    def loadJSON(self,JSON):
         pass
 
     def run(self):
