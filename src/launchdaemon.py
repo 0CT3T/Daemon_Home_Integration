@@ -24,5 +24,8 @@ while True:
 
     #tester tous les objets
     for objet in lobjet.values():
-        objet.autoloadJSON()
+        try:
+            objet.autoloadJSON()
+        except FileNotFoundError:
+            pass
         objet.run()

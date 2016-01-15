@@ -8,20 +8,19 @@ class LED(Hardware):
         super().__init__()
         self.allmode = ["ALLUMER","ETEINTE","BLINKER"]
         self.mode = "ETEINTE"
-        self.JSONurl = "Configuration/json/LED.json"
+        self.JSONname = "LED.json"
 
     def saveJSON(self):
-        bj = json.dumps(self,default=jdefault,indent=4)
-        with open(self.JSONurl, "w") as fichier:
+        with open(JSONdirectory + self.JSONname, "w") as fichier:
             fichier.write(self.getJSON())
-        return self.JSONurl
+        return JSONdirectory + self.JSONname
 
     def getJSON(self):
-        obj = json.dumps(self,default=jdefault)
-        return obj
+        return json.dumps(self,default=jdefault, indent=4)
+
 
     def autoloadJSON(self):
-        with open(self.JSONurl, "r") as fichier:
+        with open(JSONdirectory + self.JSONname, "r") as fichier:
             JSON = fichier.read()
         self.loadJSON(JSON)
 
@@ -37,7 +36,7 @@ class LED(Hardware):
         return self.__name__
 
     def getfilename(self):
-        return 'LED.json'
+        return self.JSONname
 
     def getallmode(self):
         return self.allmode
