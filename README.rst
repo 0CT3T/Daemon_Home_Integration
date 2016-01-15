@@ -2,11 +2,11 @@
 Object_Home_Integration : a new way to see IOT
 ****************************************
 
-Ce projet a pour rôle d'être integrer dans un objet. il possede un daemon permettant le controle des Modules de l'objet.
+Ce projet a pour objectif d'être intégré dans un objet. Il possède un daemon permettant le controle des différents modules de l'objet.
 Un webserver permettant de recevoir un fichier au format JSON pour chaque module. 
-Et une API totalement configurable en python pour obtanir la liste de tous les modules.
+Et une API totalement configurable en python pour obtenir la liste de tous les modules.
 
-Ce projet est ecrit en python et utilise la puissance du framework Django.
+Ce projet est écrit en python et utilise la puissance du framework Django.
 
 .. contents::
     :local:
@@ -17,39 +17,39 @@ Ce projet est ecrit en python et utilise la puissance du framework Django.
 API
 ===
 
-L'API va permettre d'acceder à tous les modules de l'objet. 
-Elle est situé dans le dossier daemon car essentiel à celui-ci.
+L'API va permettre d'accèder à tous les modules de l'objet. 
+Elle est située dans le dossier daemon car essentiel à celui-ci.
 Elle se configure automatiquement et permet un ajout ultra rapide d'un nouveau module dans notre objet à l'aide de fichier de configuration.
-Elle permet aussi d'initialiser la liste de regle pour le daemon.
+Elle permet aussi d'initialiser la liste de règle pour le daemon.
 
 -------------
 Configuration
 -------------
 
-Il s'agit de l'initialisation des differents modules en chargeant le fichier module.json.
-Il va aussi créer trois variables lobjet contenant un dictionnaire de toutes les classes, lmodule permettant de loader les classes et lrules pour la liste de regle.
+Il s'agit de l'initialisation des différents modules en chargeant le fichier module.json.
+Il va aussi créer trois variables: "lobjet" contenant un dictionnaire de toutes les classes, "lmodule" permettant de loader les classes et "lrules" pour la liste des règles.
 
 ------
 Module
 ------
 
-Ils correspondent aux classes des objets implementant les fonctions de la classe abstraite Hardware.
-Ceci va permettre leur utilisation de maniere generique.
-Un modele de Module fini est celui de LED.py.
+Ils correspondent aux classes des objets implémentant les fonctions de la classe abstraite Hardware.
+Ceci va permettre leur utilisation de maniere générique.
+Le module défini dans LED.py est abouti.
 Un exemple d'utilisation de tous les objets se trouve dans exemple.py
 
 -----
 Rules
 -----
 
-Ils correspondent aux classes de regle qui vont se vérifier en continu avec le daemon.
-Un exemple d'une regle est ruleexemple.py
+Ils correspondent aux classes de règles qui vont être vérifiées de manière continue avec le daemon.
+Un exemple de règle est ruleexemple.py
 
 -----------
-Integration
+Intégration
 -----------
 
-pour integrer cet API dans un projet il suffit d'importer la librairie Initialisation :
+Pour intégrer cette API dans un projet il suffit d'importer la librairie Initialisation :
  
 .. code-block:: python
 
@@ -59,21 +59,21 @@ pour integrer cet API dans un projet il suffit d'importer la librairie Initialis
 A faire
 -------
 
-* Ajout des autres modules et regles
-* fichier JSON specifique aux modules
-* loader tous les fichiers dans le repertoire au lieu d'un fichier de configuration
-* check update
+* Ajout des autres modules et règles
+* Fichier JSON spécifique aux modules
+* Loader tous les fichiers dans le repertoire au lieu d'un fichier de configuration
+* Check update
 
 ======
 DAEMON
 ======
 
-Le daemon est un executable qui va en continue vérifier si une regles est valide et executer le code d'un objet en fonction de son etat chargé dans un fichier JSON associé.
+Le daemon est un exécutable qui va vérifier, de manière continue, que toutes les règles sont bien respectées, sinon il exécute le code d'un objet en fonction de son état chargé dans un fichier JSON associé.
 
 ------
 LANCER
 ------
-Pour executer le daemon il suffit de lancer la commande :
+Pour exécuter le daemon il suffit de lancer la commande :
 
 .. code-block:: bash
 
@@ -83,20 +83,20 @@ Pour executer le daemon il suffit de lancer la commande :
 A faire
 -------
 
-* Creation du service avec systemd
+* Création du service avec systemd
 
 =========
 WEBSERVER
 =========
 
-Le webserver codé en python grace au framework django va recevoir une requete POST et créer le fichier recu dans l'url avec dedans les données contenu dans le body.
+Le webserver est codé en python via le framework Django et reçoit une requête POST, crée un fichier JSON qui passe dans l'url contenant des données.
 Ceci va permettre d'envoyer les nouvelles configuration d'un objet avec une requete HTTP.
 
 ------
 LANCER
 ------
 Pour lancer le webserver il suffit de lancer la commande :
-apres avoir bien sûre installer django et djangorestframework. 
+après avoir installé django et djangorestframework. 
 ou bien créer un environnement virtuel les contenant.
 
 .. code-block:: bash
@@ -106,7 +106,7 @@ ou bien créer un environnement virtuel les contenant.
 ------
 TESTER
 ------
-Ceci va créer un fichier led.json contenant les donnée en json apres -d
+Ceci va créer un fichier led.json contenant les données en JSON après -d
 
 .. code-block:: bash
 
@@ -116,6 +116,6 @@ Ceci va créer un fichier led.json contenant les donnée en json apres -d
 A faire
 -------
 
-* Creation du service avec systemd
+* Création du service avec système
 * Mise en place avec Apache
-* Resoudre probleme de sécurité pour faille csv
+* Résoudre problème de sécurité pour faille csv
