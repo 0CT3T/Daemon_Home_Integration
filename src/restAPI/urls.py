@@ -10,6 +10,6 @@ from restAPI import views
 
 urlpatterns = [
     #url(r'^', include(router.urls)),
-    url(r'^(?P<fichier>\D+)/(?P<json>.+)', views.home),
+    url(r'^(?P<fichier>\D+)', views.home),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]

@@ -1,12 +1,15 @@
 
 from __future__ import unicode_literals
-from django.http import HttpResponse
+from django.http import HttpResponse,HttpRequest,Http404
 from daemon.initialisation import *
 
 
-def home(request,fichier,json):
-    obj = lobjet["LED"].getJSON()
-    with open('daemon/Configuration/json/' + fichier, "w") as fichier:
-            fichier.write(json)
-    return HttpResponse(obj)
+def home(request,fichier):
+    if request.method == 'POST':
+        print(request.body)
+        with open(JSONdirectory + fichier, "w") as fichier:
+            fichier.write(request.body.decode("utf-8") )
+        return HttpResponse(status=201)
+
+    return Http404("only POST methode")
 
