@@ -20,7 +20,7 @@ class LED(Hardware):
         obj = json.dumps(self,default=jdefault)
         return obj
 
-    def loadJSON(self):
+    def autoloadJSON(self):
         with open(self.JSONurl, "r") as fichier:
             JSON = fichier.read()
         self.loadJSON(JSON)

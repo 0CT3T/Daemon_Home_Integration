@@ -5,7 +5,8 @@ from daemon.initialisation import *
 
 
 def home(request,fichier,json):
-    with open(fichier, "w") as fichier:
+    obj = lobjet["LED"].getJSON()
+    with open('daemon/Configuration/json/' + fichier, "w") as fichier:
             fichier.write(json)
-    return HttpResponse(json)
+    return HttpResponse(obj)
 

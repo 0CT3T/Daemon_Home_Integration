@@ -1,4 +1,4 @@
-from initialisation import *
+from daemon.initialisation import *
 
 #################################
 #
@@ -24,7 +24,5 @@ while True:
 
     #tester tous les objets
     for objet in lobjet.values():
-        objet.loadJSON()
+        objet.autoloadJSON()
         objet.run()
-    print(lobjet["LED"].getJSON())
-

@@ -9,7 +9,7 @@ from daemon.Configuration.Modele import *
 
 
 # CHARGEMENT DU FICHIER de configuration des modules
-with open("daemon/Configuration/json/module.json", "r") as fichier:
+with open(sys.path[0]+ "/daemon/Configuration/json/module.json", "r") as fichier:
     JSON = fichier.read()
 config.load(JSON)
 

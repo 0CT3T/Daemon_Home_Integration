@@ -24,7 +24,7 @@ class Hardware:
     def getfilename(self):
         pass
 
-    def loadJSON(self):
+    def autoloadJSON(self):
         pass
 
     def loadJSON(self,JSON):
