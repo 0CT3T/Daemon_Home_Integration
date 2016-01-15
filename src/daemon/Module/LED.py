@@ -33,7 +33,7 @@ class LED(Hardware):
         print(self.mode)
 
     def getname(self):
-        return self.__name__
+        return self.__class__.__name__
 
     def getfilename(self):
         return self.JSONname
