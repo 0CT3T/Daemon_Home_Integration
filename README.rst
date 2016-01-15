@@ -52,6 +52,7 @@ Integration
 pour integrer cet API dans un projet il suffit d'importer la librairie Initialisation :
  
 .. code-block:: python
+
     from daemon.initialisation import *
     
 -------
@@ -75,7 +76,8 @@ LANCER
 Pour executer le daemon il suffit de lancer la commande :
 
 .. code-block:: bash
-    python3 launchdaemon.py
+
+    $python3 launchdaemon.py
     
 -------
 A faire
@@ -98,7 +100,8 @@ apres avoir bien sûre installer django et djangorestframework.
 ou bien créer un environnement virtuel les contenant.
 
 .. code-block:: bash
-    python manage.py runserver
+
+    $python manage.py runserver
     
 ------
 TESTER
@@ -106,7 +109,8 @@ TESTER
 Ceci va créer un fichier led.json contenant les donnée en json apres -d
 
 .. code-block:: bash
-    curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New item", "year": "2009"}' http://127.0.0.1:8000/led.json
+
+    $curl -i -X POST -H 'Content-Type: application/json' -d '{"name": "New item", "year": "2009"}' http://127.0.0.1:8000/led.json
     
 -------
 A faire
