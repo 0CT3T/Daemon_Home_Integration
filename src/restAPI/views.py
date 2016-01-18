@@ -1,9 +1,11 @@
 
 from __future__ import unicode_literals
 from django.http import HttpResponse,HttpRequest,Http404
+from django.views.decorators.csrf import csrf_exempt
 from daemon.initialisation import *
 
 
+@csrf_exempt
 def home(request,fichier):
     if request.method == 'POST':
         print(request.body)

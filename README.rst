@@ -116,6 +116,5 @@ Ceci va créer un fichier led.json contenant les données en JSON après -d
 A faire
 -------
 
-* Création du service avec système
+* Création du service avec systèmed
 * Mise en place avec Apache
-* Résoudre problème de sécurité pour faille csv
