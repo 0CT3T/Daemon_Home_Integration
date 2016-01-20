@@ -14,7 +14,7 @@ class LED(Hardware):
         self.JSONname = "LED.json"
         self.parametre = {}
         self.attribute = ["Frequency"]
-        #import des classes et objet
+        #import des Attributs
         for item in self.attribute:
             temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/" + item+".py").load_module(), item)
             self.parametre[item] = temp(self.getname())
@@ -26,16 +26,27 @@ class LED(Hardware):
         return JSONdirectory + self.getname() + '/' + self.JSONname
 
     def getJSON(self):
-        return json.dumps(self.mode,default=jdefault)
+        dic = {'mode':self.mode}
+        return json.dumps(dic)
 
 
     def autoloadJSON(self):
-        with open(JSONdirectory + self.getname() + "/" + self.JSONname, "r") as fichier:
-            JSON = fichier.read()
-        self.loadJSON(JSON)
+        #load himself
+        try:
+            with open(JSONdirectory + self.getname() + "/" + self.JSONname, "r") as fichier:
+                JSON = fichier.read()
+            self.loadJSON(JSON)
+        except FileNotFoundError:
+            self.saveJSON()
+        except ValueError:
+            pass
+        #autoload all attribute
+        for item in self.attribute:
+            self.parametre[item].autoloadJSON()
 
     def loadJSON(self,JSON):
-        self.mode = json.loads(JSON)
+        dic = json.loads(JSON)
+        self.mode = dic['mode']
 
     #run pour utiliser le driver
     #à implementer

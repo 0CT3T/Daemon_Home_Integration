@@ -8,21 +8,29 @@ class Frequency():
         self.value = 100
         self.objectname = objectname
 
+
     def saveJSON(self):
         with open(JSONdirectory + self.objectname + "/" + self.getname() + ".json", "w") as fichier:
             fichier.write(self.getJSON())
-        return JSONdirectory + self.objectname + "/" + + self.getname() + ".json"
+        return JSONdirectory + self.objectname + "/" + self.getname() + ".json"
 
     def getJSON(self):
-        return json.dumps(self,default=jdefault)
+        dic = {'value':self.value}
+        return json.dumps(dic)
 
     def autoloadJSON(self):
-        with open(JSONdirectory + self.objectname + "/" + + self.getname() + ".json", "r") as fichier:
-            JSON = fichier.read()
-        self.loadJSON(JSON)
+        try:
+            with open(JSONdirectory + self.objectname + "/" + self.getname() + ".json", "r") as fichier:
+                JSON = fichier.read()
+            self.loadJSON(JSON)
+        except FileNotFoundError:
+            self.saveJSON()
+        except ValueError:
+            pass
 
     def loadJSON(self,JSON):
-        self.__dict__= json.loads(JSON)
+        dic = json.loads(JSON)
+        self.value = dic['value']
 
     def getvalue(self):
         return self.value
@@ -32,3 +40,4 @@ class Frequency():
 
     def setvalue(self, value):
         self.value = value
+        self.saveJSON()

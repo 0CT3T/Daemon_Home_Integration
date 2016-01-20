@@ -44,3 +44,12 @@ class Hardware:
 
     def setmode(self,value):
         pass
+
+    def getAllparam(self):
+        pass
+
+    def getparamvalue(self, name):
+        pass
+
+    def setparamvalue(self, name, value):
+        pass
