@@ -3,6 +3,8 @@ import json
 from daemon.Configuration.Modele import *
 from importlib.machinery import SourceFileLoader
 
+import os, re
+
 class LED(Hardware):
 
 
@@ -13,7 +15,14 @@ class LED(Hardware):
         self.mode = "ETEINTE"
         self.JSONname = "LED.json"
         self.parametre = {}
-        self.attribute = ["Frequency"]
+        self.attribute = []
+
+        #Chercher tous les attributs dans le dossier LED
+        for path, dirs, files in os.walk(Moduledirectory + self.getname() + "/"):
+            for file in files:
+                if re.match(r"(.)+.py$", file) != None:
+                    self.attribute.append(file[:-3])
+
         #import des Attributs
         for item in self.attribute:
             temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/" + item+".py").load_module(), item)
