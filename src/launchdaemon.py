@@ -6,7 +6,7 @@ from daemon.initialisation import *
 #
 ######################################
 
-print(lobjet["LED"].getname())
+print(lobjet["LED"].getallmode()[0])
 
 #test des objets
 #for objet in lobjet.values():
@@ -28,4 +28,8 @@ while True:
             objet.autoloadJSON()
         except FileNotFoundError:
             pass
+        except ValueError:
+            pass
         objet.run()
+
+

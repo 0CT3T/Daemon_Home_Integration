@@ -1,9 +1,0 @@
-{
-    "allmode": [
-        "ALLUMER",
-        "ETEINTE",
-        "BLINKER"
-    ],
-    "JSONname": "LED.json",
-    "mode": "BLINKER"
-}
