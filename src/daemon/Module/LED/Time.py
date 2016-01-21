@@ -2,10 +2,10 @@ import json
 from daemon.Configuration.Modele import *
 
 
-class Frequency():
+class Time():
 
     def __init__(self, objectname):
-        self.value = 100
+        self.value = 125
         self.objectname = objectname
         self.JSONfilename = self.getname() + ".json"
 

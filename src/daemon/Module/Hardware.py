@@ -45,6 +45,12 @@ class Hardware:
     def setmode(self,value):
         pass
 
+    #####################
+    #
+    # Parametre
+    #
+    ########################
+
     def getAllparam(self):
         pass
 
@@ -52,4 +58,10 @@ class Hardware:
         pass
 
     def setparamvalue(self, name, value):
+        pass
+
+    def getparamJSON(self, name):
+        pass
+
+    def getparamJSONfilename(self,name):
         pass

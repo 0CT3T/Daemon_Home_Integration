@@ -86,3 +86,9 @@ class LED(Hardware):
 
     def setparamvalue(self, name, value):
         self.parametre[name].setvalue(value)
+
+    def getparamJSON(self, name):
+        return self.parametre[name].getJSON()
+
+    def getparamJSONfilename(self,name):
+        return self.parametre[name].getJSONfilename()
