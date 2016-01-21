@@ -6,16 +6,16 @@ from daemon.initialisation import *
 #
 ######################################
 
-print(lobjet["LED"].getparamJSONfilename('Frequency'))
-
-lobjet["LED"].saveJSON()
-lobjet["LED"].autoloadJSON()
 
 
+lobjet["PIR"].saveJSON()
+lobjet["PIR"].autoloadJSON()
 
-for param in lobjet['LED'].getAllparam():
-    print(lobjet["LED"].getparamvalue(param))
-    print(lobjet["LED"].getparamJSONfilename(param))
+
+
+for param in lobjet['PIR'].getAllparam():
+    print(lobjet["PIR"].getparamvalue(param))
+    print(lobjet["PIR"].getparamJSONfilename(param))
 
 #test des objets
 #for objet in lobjet.values():
