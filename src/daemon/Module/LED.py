@@ -70,12 +70,11 @@ class LED(Hardware):
     def getallmode(self):
         return self.allmode
 
-    def getmode(self):
-        return self.mode
-
-    def setmode(self,value):
-        self.mode = value
-        self.saveJSON()
+    #####################
+    #
+    # Parametre
+    #
+    ########################
 
     def getallparam(self):
         return self.attribute

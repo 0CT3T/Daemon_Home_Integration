@@ -1,7 +1,8 @@
-
 from __future__ import unicode_literals
-from django.http import HttpResponse,HttpRequest,Http404
+import sys
+from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
+
 from daemon.initialisation import *
 
 

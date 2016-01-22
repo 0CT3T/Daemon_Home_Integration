@@ -33,17 +33,11 @@ class Hardware:
     def run(self):
         pass
 
-    def getdata(self):
-        pass
 
     def getallmode(self):
         pass
 
-    def getmode(self):
-        pass
 
-    def setmode(self,value):
-        pass
 
     #####################
     #
