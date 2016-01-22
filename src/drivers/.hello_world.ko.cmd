@@ -1,1 +1,0 @@
-cmd_/home/amrheinsebastien/pfe/archi/src/drivers/hello_world.ko := ld -r -m elf_x86_64 -T ./scripts/module-common.lds --build-id  -o /home/amrheinsebastien/pfe/archi/src/drivers/hello_world.ko /home/amrheinsebastien/pfe/archi/src/drivers/hello_world.o /home/amrheinsebastien/pfe/archi/src/drivers/hello_world.mod.o

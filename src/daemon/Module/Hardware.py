@@ -51,7 +51,7 @@ class Hardware:
     #
     ########################
 
-    def getAllparam(self):
+    def getallparam(self):
         pass
 
     def getparamvalue(self, name):

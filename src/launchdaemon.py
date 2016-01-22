@@ -6,7 +6,7 @@ from daemon.initialisation import *
 #
 ######################################
 
-print(lobjet["LED"].getallmode()[0])
+
 
 #test des objets
 #for objet in lobjet.values():

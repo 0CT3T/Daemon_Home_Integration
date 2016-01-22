@@ -12,8 +12,7 @@ class PIR(Hardware):
     def __init__(self):
         super().__init__()
         self.allmode = ["ALLUMER","ETEINTE"]
-        self.mode = "ETEINTE"
-        self.JSONname = "PIR.json"
+        self.JSONname = self.getname()+".json"
         self.parametre = {}
         self.attribute = []
 
@@ -35,7 +34,7 @@ class PIR(Hardware):
         return JSONdirectory + self.getname() + '/' + self.JSONname
 
     def getJSON(self):
-        dic = {'mode':self.mode}
+        dic = {'allmode':self.allmode}
         return json.dumps(dic)
 
 
@@ -55,7 +54,7 @@ class PIR(Hardware):
 
     def loadJSON(self,JSON):
         dic = json.loads(JSON)
-        self.mode = dic['mode']
+        self.allmode = dic['allmode']
 
     #run pour utiliser le driver
     #à implementer
@@ -78,7 +77,7 @@ class PIR(Hardware):
         self.mode = value
         self.saveJSON()
 
-    def getAllparam(self):
+    def getallparam(self):
         return self.attribute
 
     def getparamvalue(self, name):
