@@ -17,14 +17,14 @@ class PIR(Hardware):
         self.attribute = []
 
         #Chercher tous les attributs dans le dossier LED
-        for path, dirs, files in os.walk(Moduledirectory + self.getname() + "/"):
+        for path, dirs, files in os.walk(Moduledirectory + self.getname() + "/Attribut/"):
             for file in files:
                 if re.match(r"(.)+.py$", file) != None:
                     self.attribute.append(file[:-3])
 
         #import des Attributs
         for item in self.attribute:
-            temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/" + item+".py").load_module(), item)
+            temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Attribut/" + item+".py").load_module(), item)
             self.parametre[item] = temp(self.getname())
 
 
