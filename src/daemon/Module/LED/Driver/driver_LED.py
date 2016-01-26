@@ -17,19 +17,19 @@ class driver_LED():
         #t1.start()
 
 
-    def function():
+    def function(self):
         while 1:
             pass
 
 
-    def allumer(opacite):
+    def allumer(self,opacite):
         self.pwm.ChangeFrequency(100)
         self.pwm.start(opacite)
     
-    def stop():
+    def stop(self):
         self.pwm.stop()
 
-    def blink(frequency,opacity):
+    def blink(self,frequency,opacity):
         self.pwm.ChangeFrequency(frequency)
         self.pwm.start(opacity)
 
