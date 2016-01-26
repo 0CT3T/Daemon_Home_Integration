@@ -78,6 +78,10 @@ class LED(Hardware):
         print(self.getparamvalue("Mode"))
         if self.getparamvalue("Mode") == "ALLUMER":
             self.driver.allumer(100)
+        if self.getparamvalue("Mode") == "ETEINTE":
+            self.driver.stop()
+        if self.getparamvalue("Mode") == "BLINKER":
+            self.driver.blink(20,20)
 
     def getname(self):
         return self.__class__.__name__
