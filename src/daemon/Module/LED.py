@@ -15,6 +15,9 @@ class LED(Hardware):
         self.JSONname = self.getname() + ".json"
         self.parametre = {}
         self.attribute = []
+        self.functionname = []
+        self.function = {}
+
 
         #Chercher tous les attributs dans le dossier LED
         for path, dirs, files in os.walk(Moduledirectory + self.getname() + "/Attribut/"):
@@ -27,6 +30,19 @@ class LED(Hardware):
             temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Attribut/" + item+".py").load_module(), item)
             self.parametre[item] = temp(self.getname())
 
+        #Chercher toutes les fonctions dans le dossier LED
+        for path, dirs, files in os.walk(Moduledirectory + self.getname() + "/Function/"):
+            for file in files:
+                if re.match(r"(.)+.py$", file) != None:
+                    self.functionname.append(file[:-3])
+
+        #import des fonctions
+        for item in self.functionname:
+            temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Function/" + item+".py").load_module(), item)
+            self.function[item] = temp(self)
+
+        temp = getattr(SourceFileLoader("driver_LED",Moduledirectory + self.getname() + "/Driver/driver_LED.py").load_module(), "driver_LED")
+        self.driver = temp()
 
     def saveJSON(self):
         with open(JSONdirectory + self.getname() + "/" + self.JSONname, "w") as fichier:
@@ -60,6 +76,8 @@ class LED(Hardware):
     #à implementer
     def run(self):
         print(self.getparamvalue("Mode"))
+        if self.getparamvalue("Mode") == "ALLUMER":
+            self.driver.allumer(100)
 
     def getname(self):
         return self.__class__.__name__
@@ -90,3 +108,12 @@ class LED(Hardware):
 
     def getparamJSONfilename(self,name):
         return self.parametre[name].getJSONfilename()
+
+    #####################
+    #
+    # FUNCTION
+    #
+    ########################
+
+    def getallfunction(self):
+        return self.functionname
