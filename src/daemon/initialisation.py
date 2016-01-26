@@ -1,11 +1,16 @@
-import sys
+
 from importlib.machinery import SourceFileLoader
 from daemon.Configuration.Modele import *
+from daemon.Configuration.configuration import configuration
 
 #############################################################
 #
 #                   INITIALISATION
 #############################################################
+
+lobjet = {}  #liste des classes
+lmodrules = [] #liste des modules de regle
+config = configuration()
 
 
 # CHARGEMENT DU FICHIER de configuration des modules
@@ -20,10 +25,7 @@ for item in config.getlitem():
     temp = getattr(SourceFileLoader(item,Moduledirectory +item+".py").load_module(), item)
     lobjet[item] = temp()
 
-#import des regles
-for rule in config.getlrules():
-    temp = SourceFileLoader(rule,Ruledirectory + rule+".py").load_module()
-    lrules.append(temp)
+
 
 
 

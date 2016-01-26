@@ -1,14 +1,11 @@
-from daemon.Configuration.configuration import configuration
+
 import sys
 
 # variable global
 JSONdirectory = sys.path[0]+ "/daemon/Configuration/json/"
 Moduledirectory = sys.path[0]+ "/daemon/Module/"
 Ruledirectory = sys.path[0]+ "/daemon/Rules/"
-lobjet = {}  #liste des classes
-lmodrules = [] #liste des modules de regle
-lrules = []  #liste de regle
-config = configuration()
+
 
 #methode globale
 

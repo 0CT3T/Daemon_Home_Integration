@@ -19,8 +19,7 @@ from daemon.initialisation import *
 
 while True:
     #tester toutes les regles
-    for rule in lrules:
-        rule.test()
+
 
     #tester tous les objets
     for objet in lobjet.values():
