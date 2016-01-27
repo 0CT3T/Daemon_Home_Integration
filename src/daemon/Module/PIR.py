@@ -58,8 +58,9 @@ class PIR(Hardware):
 
     #run pour utiliser le driver
     #à implementer
-    def run(self):
-        print(self.getparamvalue("Mode"))
+    #def run(self):
+        #print(self.getparamvalue("Mode"))
+
 
     def getname(self):
         return self.__class__.__name__

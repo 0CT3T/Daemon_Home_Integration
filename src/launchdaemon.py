@@ -17,18 +17,24 @@ from daemon.initialisation import *
 #    print(objet.getmode())
 #    objet.saveJSON()
 
-while True:
-    #tester toutes les regles
+lobjet["LED"].execfunction("Allumer",{"Time":10})
+
+try:
+    while True:
+        #tester toutes les regles
 
 
-    #tester tous les objets
-    for objet in lobjet.values():
-        try:
-            objet.autoloadJSON()
-        except FileNotFoundError:
-            pass
-        except ValueError:
-            pass
-        objet.run()
+        #tester tous les objets
+        for objet in lobjet.values():
+            try:
+                objet.autoloadJSON()
+            except FileNotFoundError:
+                pass
+            except ValueError:
+                pass
+            objet.run()
+
+except KeyboardInterrupt:
+    pass
 
 

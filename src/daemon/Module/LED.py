@@ -1,12 +1,11 @@
 from daemon.Module.Hardware import Hardware
-import json
 from daemon.Configuration.Modele import *
 from importlib.machinery import SourceFileLoader
-
-import os, re
+import os, re, json, threading
 
 class LED(Hardware):
 
+    threading
 
 
     def __init__(self):
@@ -17,6 +16,7 @@ class LED(Hardware):
         self.attribute = []
         self.functionname = []
         self.function = {}
+
 
 
         #Chercher tous les attributs dans le dossier LED
@@ -41,8 +41,8 @@ class LED(Hardware):
             temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Function/" + item+".py").load_module(), item)
             self.function[item] = temp(self)
 
-        temp = getattr(SourceFileLoader("driver_LED",Moduledirectory + self.getname() + "/Driver/driver_LED.py").load_module(), "driver_LED")
-        self.driver = temp()
+        #temp = getattr(SourceFileLoader("driver_LED",Moduledirectory + self.getname() + "/Driver/driver_LED.py").load_module(), "driver_LED")
+        #self.driver = temp()
 
     def saveJSON(self):
         with open(JSONdirectory + self.getname() + "/" + self.JSONname, "w") as fichier:
@@ -72,16 +72,24 @@ class LED(Hardware):
         dic = json.loads(JSON)
         self.allmode = dic['allmode']
 
-    #run pour utiliser le driver
-    #à implementer
+    #####################
+    #
+    # RUN
+    #
+    ########################
+
     def run(self):
-        print(self.getparamvalue("Mode"))
-        if self.getparamvalue("Mode") == "ALLUMER":
-            self.driver.allumer(100)
-        if self.getparamvalue("Mode") == "ETEINTE":
-            self.driver.stop()
-        if self.getparamvalue("Mode") == "BLINKER":
-            self.driver.blink(20,20)
+
+        if self.threading.is_alive():
+            print(self.getparamvalue("Mode"))
+        else:
+            print(self.getparamvalue("Mode"))
+            #if self.getparamvalue("Mode") == "ALLUMER":
+            #    self.driver.allumer(100)
+            #if self.getparamvalue("Mode") == "ETEINTE":
+            #    self.driver.stop()
+            #if self.getparamvalue("Mode") == "BLINKER":
+            #    self.driver.blink(20,20)
 
     def getname(self):
         return self.__class__.__name__
@@ -121,3 +129,20 @@ class LED(Hardware):
 
     def getallfunction(self):
         return self.functionname
+
+    def execfunction(self, functionname, *args, **kwargs):
+        #mettre les parametre
+        try:
+            if len(args) == 0:
+                pass
+            else:
+                print(args)
+                for dic in args:
+                    for key in dic.keys():
+                        self.setparamvalue(key,dic[key])
+        except:
+            pass
+
+        self.threading = self.function[functionname]
+        self.threading.setDaemon(True)
+        self.threading.start()

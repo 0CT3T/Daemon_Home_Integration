@@ -7,12 +7,15 @@ from daemon.initialisation import *
 ######################################
 
 
+print(lobjet["LED"].getallfunction())
 
 lobjet["PIR"].saveJSON()
 lobjet["PIR"].autoloadJSON()
 
-lobjet["LED"].setparamvalue("Mode",lobjet["LED"].getallmode()[2])
+lobjet["LED"].setparamvalue("Mode",lobjet["LED"].getallmode()[0])
+lobjet["LED"].execfunction("Allumer")
 
+print("test")
 for objet in lobjet.values():
     objetname = objet.getname()
     print("********" + objetname + "**********")

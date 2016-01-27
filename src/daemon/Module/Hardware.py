@@ -59,3 +59,15 @@ class Hardware:
 
     def getparamJSONfilename(self,name):
         pass
+
+    #####################
+    #
+    # FUNCTION
+    #
+    ########################
+
+    def getallfunction(self):
+        pass
+
+    def execfunction(self, functionname, *args, **kwargs):
+        pass
