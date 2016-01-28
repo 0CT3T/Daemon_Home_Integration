@@ -71,3 +71,12 @@ class Hardware:
 
     def execfunction(self, functionname, *args, **kwargs):
         pass
+
+    def setfunction(self, name, attribut):
+        pass
+
+    def getfunction(self):
+        pass
+
+    def getattributfunction(self, functionname):
+        pass
