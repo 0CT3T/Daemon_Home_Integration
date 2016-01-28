@@ -6,6 +6,7 @@ class Allumer(threading.Thread):
     def __init__(self, object):
         threading.Thread.__init__(self)
         self.object = object
+        self.attribut = ["Time"]
 
 
     def run(self):
@@ -15,3 +16,7 @@ class Allumer(threading.Thread):
 
         #if self.object.getparamvalue("Mode") == "ETEINTE":
         #    self.object.setparamvalue("Mode", "ALLUMER")
+
+
+    def getAttribut(self):
+        return self.attribut

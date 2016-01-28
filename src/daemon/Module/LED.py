@@ -8,6 +8,8 @@ class LED(Hardware):
     threading
 
 
+
+
     def __init__(self):
         super().__init__()
         self.allmode = ["ALLUMER","ETEINTE","BLINKER"]
@@ -16,6 +18,8 @@ class LED(Hardware):
         self.attribute = []
         self.functionname = []
         self.function = {}
+        self.startfunc = ""
+        self.funcattribut = {}
 
 
 
@@ -50,7 +54,7 @@ class LED(Hardware):
         return JSONdirectory + self.getname() + '/' + self.JSONname
 
     def getJSON(self):
-        dic = {'allmode':self.allmode}
+        dic = {'allmode':self.allmode,'startfunction':self.startfunc,'funcattribut':self.funcattribut}
         return json.dumps(dic)
 
 
@@ -71,6 +75,8 @@ class LED(Hardware):
     def loadJSON(self,JSON):
         dic = json.loads(JSON)
         self.allmode = dic['allmode']
+        self.startfunc = dic['startfunction']
+        self.funcattribut = dic['funcattribut']
 
     #####################
     #
@@ -80,10 +86,14 @@ class LED(Hardware):
 
     def run(self):
 
-        if self.threading.is_alive():
-            print(self.getparamvalue("Mode"))
-        else:
-            print(self.getparamvalue("Mode"))
+        if self.startfunc != "":
+            self.execfunction(self.startfunc,self.funcattribut)
+            #resetfunction
+            self.setfunction("",{})
+
+
+
+        print(self.getparamvalue("Mode"))
             #if self.getparamvalue("Mode") == "ALLUMER":
             #    self.driver.allumer(100)
             #if self.getparamvalue("Mode") == "ETEINTE":
@@ -130,19 +140,31 @@ class LED(Hardware):
     def getallfunction(self):
         return self.functionname
 
-    def execfunction(self, functionname, *args, **kwargs):
+    def setfunction(self, name, attribut):
+        self.startfunc = name
+        self.funcattribut = attribut
+        self.saveJSON()
+
+    def getfunction(self):
+        return self.startfunc
+
+    def getattributfunction(self, functionname):
+        return self.function[functionname].getAttribut()
+
+
+    def execfunction(self, functionname, funcattribut):
         #mettre les parametre
         try:
-            if len(args) == 0:
+            if len(funcattribut) == 0:
                 pass
             else:
-                print(args)
-                for dic in args:
-                    for key in dic.keys():
-                        self.setparamvalue(key,dic[key])
+                for key in funcattribut.keys():
+                    self.setparamvalue(key,funcattribut[key])
         except:
             pass
 
+        #Demarrer thread de la function
         self.threading = self.function[functionname]
+        self.threading.setName(functionname)
         self.threading.setDaemon(True)
         self.threading.start()

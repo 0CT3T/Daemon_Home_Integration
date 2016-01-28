@@ -13,7 +13,9 @@ lobjet["PIR"].saveJSON()
 lobjet["PIR"].autoloadJSON()
 
 lobjet["LED"].setparamvalue("Mode",lobjet["LED"].getallmode()[0])
-lobjet["LED"].execfunction("Allumer")
+
+print(lobjet["LED"].getattributfunction("Allumer"))
+lobjet["LED"].setfunction("Allumer",{"Time":10})
 
 print("test")
 for objet in lobjet.values():

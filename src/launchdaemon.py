@@ -7,21 +7,8 @@ from daemon.initialisation import *
 ######################################
 
 
-
-#test des objets
-#for objet in lobjet.values():
-#    objet.loadJSON()
-#    objet.run()
-#    print(objet.getmode())
-#    objet.setmode(2)
-#    print(objet.getmode())
-#    objet.saveJSON()
-
-lobjet["LED"].execfunction("Allumer",{"Time":10})
-
 try:
     while True:
-        #tester toutes les regles
 
 
         #tester tous les objets
