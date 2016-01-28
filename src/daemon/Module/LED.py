@@ -20,7 +20,7 @@ class LED(Hardware):
         self.function = {}
         self.startfunc = ""
         self.funcattribut = {}
-
+        self.route = []
 
 
         #Chercher tous les attributs dans le dossier LED
@@ -45,8 +45,8 @@ class LED(Hardware):
             temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Function/" + item+".py").load_module(), item)
             self.function[item] = temp(self)
 
-        #temp = getattr(SourceFileLoader("driver_LED",Moduledirectory + self.getname() + "/Driver/driver_LED.py").load_module(), "driver_LED")
-        #self.driver = temp()
+        temp = getattr(SourceFileLoader("driver_LED",Moduledirectory + self.getname() + "/Driver/driver_LED.py").load_module(), "driver_LED")
+        self.driver = temp()
 
     def saveJSON(self):
         with open(JSONdirectory + self.getname() + "/" + self.JSONname, "w") as fichier:
@@ -93,13 +93,13 @@ class LED(Hardware):
 
 
 
-        print(self.getparamvalue("Mode"))
-            #if self.getparamvalue("Mode") == "ALLUMER":
-            #    self.driver.allumer(100)
-            #if self.getparamvalue("Mode") == "ETEINTE":
-            #    self.driver.stop()
-            #if self.getparamvalue("Mode") == "BLINKER":
-            #    self.driver.blink(20,20)
+        #print(self.getparamvalue("Mode"))
+        if self.getparamvalue("Mode") == "ALLUMER":
+            self.driver.allumer(100)
+        if self.getparamvalue("Mode") == "ETEINTE":
+            self.driver.stop()
+        if self.getparamvalue("Mode") == "BLINKER":
+            self.driver.blink(20,20)
 
     def getname(self):
         return self.__class__.__name__
@@ -168,3 +168,22 @@ class LED(Hardware):
         self.threading.setName(functionname)
         self.threading.setDaemon(True)
         self.threading.start()
+
+    #####################
+    #
+    # OBJET CONNECTEE
+    #
+    ########################
+
+
+    def addobjet(self,objet):
+        self.route.append(objet)
+
+    def getobjet(self):
+        return self.route
+
+    def removeobjet(self,name):
+        for objet in self.route:
+            if objet.getname() == name:
+                self.route.remove(objet)
+

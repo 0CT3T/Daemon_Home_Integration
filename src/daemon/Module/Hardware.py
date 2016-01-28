@@ -80,3 +80,19 @@ class Hardware:
 
     def getattributfunction(self, functionname):
         pass
+
+    #####################
+    #
+    # OBJET CONNECTEE
+    #
+    ########################
+
+
+    def addobjet(self,objet):
+        pass
+
+    def getobjet(self):
+        pass
+
+    def removeobjet(self,name):
+        pass
