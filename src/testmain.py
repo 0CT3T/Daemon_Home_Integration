@@ -18,13 +18,13 @@ lobjet["LED"].setparamvalue("Mode",lobjet["LED"].getallmode()[0])
 #TEST DES FUNCTION AVEC PARAMETRE
 print(lobjet["LED"].getattributfunction("Allumer"))
 lobjet["LED"].setfunction("Allumer",{"Time":10})
+lobjet["LED"].setfunction("Allumer",{"Time":200})
 
 
 lobjet["LED"].addobjet(lobjet["PIR"])
 lobjet["LED"].removeobjet('PIR')
 
 
-print("test")
 for objet in lobjet.values():
     objetname = objet.getname()
     print("********" + objetname + "**********")

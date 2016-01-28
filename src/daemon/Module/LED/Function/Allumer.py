@@ -7,16 +7,22 @@ class Allumer(threading.Thread):
         threading.Thread.__init__(self)
         self.object = object
         self.attribut = ["Time"]
+        self._stop = threading.Event()
+        self.starttime = time.time()
 
 
     def run(self):
         self.object.setparamvalue("Mode", "ALLUMER")
-        time.sleep(self.object.getparamvalue("Time"))
+        while not self._stop.isSet():
+            if (time.time() - self.starttime)  > self.object.getparamvalue("Time"):
+                break
         self.object.setparamvalue("Mode", "ETEINTE")
 
-        #if self.object.getparamvalue("Mode") == "ETEINTE":
-        #    self.object.setparamvalue("Mode", "ALLUMER")
 
+
+
+    def stop(self):
+        self._stop.set()
 
     def getAttribut(self):
         return self.attribut
