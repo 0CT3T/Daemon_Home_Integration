@@ -1,4 +1,4 @@
-from daemon.Module.Hardware import Hardware
+from daemon.Module.Abstract.Hardware import Hardware
 
 from importlib.machinery import SourceFileLoader
 
