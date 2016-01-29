@@ -27,6 +27,8 @@ class Hardware:
             self.startfunc = ""
             self.funcattribut = {}
             self.route = []
+            self.reglename = []
+            self.regle = {}
 
 
             #Chercher tous les attributs dans le dossier LED
@@ -50,6 +52,17 @@ class Hardware:
             for item in self.functionname:
                 temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Function/" + item+".py").load_module(), item)
                 self.function[item] = temp(self)
+
+            #Chercher toutes les fonctions dans le dossier LED
+            for path, dirs, files in os.walk(Moduledirectory + self.getname() + "/Regle/"):
+                for file in files:
+                    if re.match(r"(.)+.py$", file) != None:
+                        self.reglename.append(file[:-3])
+
+            #import des fonctions
+            for item in self.reglename:
+                temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Regle/" + item+".py").load_module(), item)
+                self.regle[item] = temp(self)
 
             self.autoloadJSON()
 
@@ -90,6 +103,9 @@ class Hardware:
             self.execfunction(self.startfunc,self.funcattribut)
             #resetfunction
             self.setfunction("",{})
+
+        for rule in self.regle.values():
+            rule.test()
 
 
     #####################

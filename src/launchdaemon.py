@@ -26,7 +26,7 @@ try:
 
 
 
-        lobjet["LED"].setfunction("Allumer",{"Time":2})
+        #lobjet["LED"].setfunction("Allumer",{"Time":2})
 
 except KeyboardInterrupt:
     pass

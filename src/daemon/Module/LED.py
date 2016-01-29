@@ -23,7 +23,7 @@ class LED(Hardware):
     ########################
 
     def run(self):
-
+        super().run()
 
 
         print(self.getparamvalue("Mode"))
