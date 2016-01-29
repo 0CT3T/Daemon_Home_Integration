@@ -1,41 +1,113 @@
 #import section
+from daemon.Configuration.Modele import *
+from importlib.machinery import SourceFileLoader
+import os, re, json, threading
 
 
 
 
 class Hardware:
 
-    #constructeur
+
+    #############################
+    #
+    # CONSTRUCTEUR
+    #
+    ############################
     def __init__(self):
         if self.__class__ is Hardware:
             raise Exception("ERREUR 01 : Hardware is abstract")
         else:
-            pass
+            self.allmode = []
+            self.JSONname = self.getname() + ".json"
+            self.parametre = {}
+            self.attribute = []
+            self.functionname = []
+            self.function = {}
+            self.startfunc = ""
+            self.funcattribut = {}
+            self.route = []
 
-    def getname(self):
-        pass
+
+            #Chercher tous les attributs dans le dossier LED
+            for path, dirs, files in os.walk(Moduledirectory + self.getname() + "/Attribut/"):
+                for file in files:
+                    if re.match(r"(.)+.py$", file) != None:
+                        self.attribute.append(file[:-3])
+
+            #import des Attributs
+            for item in self.attribute:
+                temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Attribut/" + item+".py").load_module(), item)
+                self.parametre[item] = temp(self.getname())
+
+            #Chercher toutes les fonctions dans le dossier LED
+            for path, dirs, files in os.walk(Moduledirectory + self.getname() + "/Function/"):
+                for file in files:
+                    if re.match(r"(.)+.py$", file) != None:
+                        self.functionname.append(file[:-3])
+
+            #import des fonctions
+            for item in self.functionname:
+                temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Function/" + item+".py").load_module(), item)
+                self.function[item] = temp(self)
+
+            self.autoloadJSON()
+
 
     def saveJSON(self):
-        pass
+        with open(JSONdirectory + self.getname() + "/" + self.JSONname, "w") as fichier:
+            fichier.write(self.getJSON())
+        return JSONdirectory + self.getname() + '/' + self.JSONname
 
     def getJSON(self):
-        pass
+        dic = {'allmode':self.allmode,'startfunction':self.startfunc,'funcattribut':self.funcattribut}
+        return json.dumps(dic)
 
-    def getfilename(self):
-        pass
+
 
     def autoloadJSON(self):
-        pass
+        #load himself
+        try:
+            with open(JSONdirectory + self.getname() + "/" + self.JSONname, "r") as fichier:
+                JSON = fichier.read()
+            self.loadJSON(JSON)
+        except FileNotFoundError:
+            self.saveJSON()
+        except ValueError:
+            pass
+        #autoload all attribute
+        for item in self.attribute:
+            self.parametre[item].autoloadJSON()
 
     def loadJSON(self,JSON):
-        pass
+        dic = json.loads(JSON)
+        self.allmode = dic['allmode']
+        self.startfunc = dic['startfunction']
+        self.funcattribut = dic['funcattribut']
 
     def run(self):
-        pass
+        if self.startfunc != "":
+            self.execfunction(self.startfunc,self.funcattribut)
+            #resetfunction
+            self.setfunction("",{})
 
+
+    #####################
+    #
+    # ACCESSEURS
+    #
+    ########################
+
+
+
+    def getname(self):
+        return self.__class__.__name__
+
+    def getfilename(self):
+        return self.JSONname
 
     def getallmode(self):
-        pass
+        return self.allmode
 
 
 
@@ -46,19 +118,19 @@ class Hardware:
     ########################
 
     def getallparam(self):
-        pass
+        return self.attribute
 
     def getparamvalue(self, name):
-        pass
+        return self.parametre[name].getvalue()
 
     def setparamvalue(self, name, value):
-        pass
+        self.parametre[name].setvalue(value)
 
     def getparamJSON(self, name):
-        pass
+        return self.parametre[name].getJSON()
 
     def getparamJSONfilename(self,name):
-        pass
+        return self.parametre[name].getJSONfilename()
 
     #####################
     #
@@ -67,19 +139,50 @@ class Hardware:
     ########################
 
     def getallfunction(self):
-        pass
-
-    def execfunction(self, functionname, *args, **kwargs):
-        pass
+        return self.functionname
 
     def setfunction(self, name, attribut):
-        pass
+        self.startfunc = name
+        self.funcattribut = attribut
+        self.saveJSON()
 
     def getfunction(self):
-        pass
+        return self.startfunc
 
     def getattributfunction(self, functionname):
-        pass
+        return self.function[functionname].getAttribut()
+
+
+    def execfunction(self, functionname, funcattribut):
+        #mettre les parametre
+        try:
+            if len(funcattribut) == 0:
+                pass
+            else:
+                for key in funcattribut.keys():
+                    self.setparamvalue(key,funcattribut[key])
+
+            #set le thread
+            if self.threading.isAlive():
+                self.threading.stop()
+            while self.threading.isAlive():
+                pass
+
+
+                #self.threading.close()
+        except AttributeError:
+            pass
+        except:
+             pass
+
+        #Demarrer thread de la function
+        temp = getattr(SourceFileLoader(functionname,Moduledirectory + self.getname() + "/Function/" + functionname+".py").load_module(), functionname)
+
+
+        self.threading = temp(self)
+        self.threading.setName(functionname)
+        self.threading.setDaemon(True)
+        self.threading.start()
 
     #####################
     #
@@ -89,10 +192,12 @@ class Hardware:
 
 
     def addobjet(self,objet):
-        pass
+        self.route.append(objet)
 
     def getobjet(self):
-        pass
+        return self.route
 
     def removeobjet(self,name):
-        pass
+        for objet in self.route:
+            if objet.getname() == name:
+                self.route.remove(objet)
