@@ -6,6 +6,9 @@ from daemon.initialisation import *
 #
 ######################################
 
+#lobjet["LED"].setfunction("Allumer",{"Time":1})
+
+
 
 try:
     while True:
@@ -20,6 +23,10 @@ try:
             except ValueError:
                 pass
             objet.run()
+
+
+
+        lobjet["LED"].setfunction("Allumer",{"Time":2})
 
 except KeyboardInterrupt:
     pass

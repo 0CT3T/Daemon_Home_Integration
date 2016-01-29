@@ -5,7 +5,7 @@ from daemon.Configuration.Modele import *
 class Time():
 
     def __init__(self, objectname):
-        self.value = 125
+        self.value = 1
         self.objectname = objectname
         self.JSONfilename = self.getname() + ".json"
 

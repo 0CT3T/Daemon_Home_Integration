@@ -1,1 +1,1 @@
-{"startfunction": "", "funcattribut": {}, "allmode": ["ALLUMER", "ETEINTE", "BLINKER"]}
+{"allmode": ["ALLUMER", "ETEINTE", "BLINKER"], "funcattribut": {"Time": 2}, "startfunction": "Allumer"}

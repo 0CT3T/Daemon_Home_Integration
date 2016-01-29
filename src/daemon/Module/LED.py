@@ -1,7 +1,7 @@
 from daemon.Module.Hardware import Hardware
 from daemon.Configuration.Modele import *
 from importlib.machinery import SourceFileLoader
-import os, re, json, threading
+import os, re, json, threading, sys
 
 class LED(Hardware):
 
@@ -45,8 +45,8 @@ class LED(Hardware):
             temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Function/" + item+".py").load_module(), item)
             self.function[item] = temp(self)
 
-        temp = getattr(SourceFileLoader("driver_LED",Moduledirectory + self.getname() + "/Driver/driver_LED.py").load_module(), "driver_LED")
-        self.driver = temp()
+        #temp = getattr(SourceFileLoader("driver_LED",Moduledirectory + self.getname() + "/Driver/driver_LED.py").load_module(), "driver_LED")
+        #self.driver = temp()
 
     def saveJSON(self):
         with open(JSONdirectory + self.getname() + "/" + self.JSONname, "w") as fichier:
@@ -94,12 +94,12 @@ class LED(Hardware):
 
 
         print(self.getparamvalue("Mode"))
-        if self.getparamvalue("Mode") == "ALLUMER":
-            self.driver.allumer(100)
-        if self.getparamvalue("Mode") == "ETEINTE":
-            self.driver.stop()
-        if self.getparamvalue("Mode") == "BLINKER":
-            self.driver.blink(20,20)
+        #if self.getparamvalue("Mode") == "ALLUMER":
+        #    self.driver.allumer(100)
+        #if self.getparamvalue("Mode") == "ETEINTE":
+        #    self.driver.stop()
+        #if self.getparamvalue("Mode") == "BLINKER":
+        #    self.driver.blink(20,20)
 
     def getname(self):
         return self.__class__.__name__
@@ -162,12 +162,23 @@ class LED(Hardware):
                     self.setparamvalue(key,funcattribut[key])
 
             #set le thread
-            if self.threading.isActive():
+            if self.threading.isAlive():
                 self.threading.stop()
-        except:
+            while self.threading.isAlive():
+                pass
+
+
+                #self.threading.close()
+        except AttributeError:
             pass
+        except:
+             pass
+
         #Demarrer thread de la function
-        self.threading = self.function[functionname]
+        temp = getattr(SourceFileLoader(functionname,Moduledirectory + self.getname() + "/Function/" + functionname+".py").load_module(), functionname)
+
+
+        self.threading = temp(self)
         self.threading.setName(functionname)
         self.threading.setDaemon(True)
         self.threading.start()
