@@ -8,13 +8,13 @@ class Attribut():
             raise Exception("ERREUR 01 : Attribut is abstract")
         else:
             self.value = ""
-            self.JSONfilename = self.getname() + ".json"
+            self.JSONfilename = self.objectname + "/Attribut/" + self.getname() + ".json"
             self.autoloadJSON()
 
     def saveJSON(self):
-        with open(JSONdirectory + self.objectname + "/" + self.JSONfilename, "w") as fichier:
+        with open(JSONdirectory + self.JSONfilename, "w") as fichier:
             fichier.write(self.getJSON())
-        return JSONdirectory + self.objectname + "/" + self.JSONfilename
+        return JSONdirectory +  self.JSONfilename
 
     def getJSON(self):
         dic = {'value':self.value}
@@ -22,7 +22,7 @@ class Attribut():
 
     def autoloadJSON(self):
         try:
-            with open(JSONdirectory + self.objectname + "/" + self.JSONfilename, "r") as fichier:
+            with open(JSONdirectory +  self.JSONfilename, "r") as fichier:
                 JSON = fichier.read()
             self.loadJSON(JSON)
         except FileNotFoundError:

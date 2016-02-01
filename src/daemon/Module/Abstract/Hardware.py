@@ -26,7 +26,7 @@ class Hardware:
             self.function = {}
             self.startfunc = ""
             self.funcattribut = {}
-            self.route = []
+            self.route = {}
             self.reglename = []
             self.regle = {}
 
@@ -53,13 +53,13 @@ class Hardware:
                 temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Function/" + item+".py").load_module(), item)
                 self.function[item] = temp(self)
 
-            #Chercher toutes les fonctions dans le dossier LED
+            #Chercher toutes les regles dans le dossier LED
             for path, dirs, files in os.walk(Moduledirectory + self.getname() + "/Regle/"):
                 for file in files:
                     if re.match(r"(.)+.py$", file) != None:
                         self.reglename.append(file[:-3])
 
-            #import des fonctions
+            #import des regles
             for item in self.reglename:
                 temp = getattr(SourceFileLoader(item,Moduledirectory + self.getname() + "/Regle/" + item+".py").load_module(), item)
                 self.regle[item] = temp(self)
@@ -92,6 +92,11 @@ class Hardware:
         for item in self.attribute:
             self.parametre[item].autoloadJSON()
 
+        #autoload all rules
+        for item in self.reglename:
+            self.regle[item].autoloadJSON()
+
+
     def loadJSON(self,JSON):
         dic = json.loads(JSON)
         self.allmode = dic['allmode']
@@ -104,9 +109,14 @@ class Hardware:
             #resetfunction
             self.setfunction("",{})
 
-        for rule in self.regle.values():
-            rule.test()
-
+        #stop les regles si fonction active
+        try:
+            if not self.threading.isAlive():
+                for rule in self.regle.values():
+                    rule.exec()
+        except:
+            for rule in self.regle.values():
+                    rule.exec()
 
     #####################
     #
@@ -208,12 +218,37 @@ class Hardware:
 
 
     def addobjet(self,objet):
-        self.route.append(objet)
+        self.route[objet.getname()] = objet
 
-    def getobjet(self):
-        return self.route
+    def getobjet(self,name):
+        return self.route[name]
+
+    def getallobjet(self):
+        return list(self.route.keys())
 
     def removeobjet(self,name):
-        for objet in self.route:
-            if objet.getname() == name:
-                self.route.remove(objet)
+        self.route.pop(name, None)
+
+    #####################
+    #
+    # REGLE
+    #
+    ########################
+
+    def setRule(self,name):
+        self.regle[name].set()
+
+    def clearRule(self,name):
+        self.regle[name].clear()
+
+    def isSetRule(self,name):
+        return self.regle[name].isset()
+
+    def getallrules(self):
+        return self.reglename
+
+    def getruleJSON(self, name):
+        return self.regle[name].getJSON()
+
+    def getruleJSONfilename(self,name):
+        return self.regle[name].getJSONfilename()

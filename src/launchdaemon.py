@@ -8,6 +8,11 @@ from daemon.initialisation import *
 
 #lobjet["LED"].setfunction("Allumer",{"Time":1})
 
+#Test des regles
+#lobjet["LED"].setRule("Allumer")
+
+lobjet["PIR"].addobjet(lobjet["LED"])
+lobjet["PIR"].setRule("Detection")
 
 
 try:

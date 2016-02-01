@@ -21,17 +21,28 @@ lobjet["LED"].setfunction("Allumer",{"Time":10})
 lobjet["LED"].setfunction("Allumer",{"Time":200})
 
 
+#GESTION DE LA ROUTE
 lobjet["LED"].addobjet(lobjet["PIR"])
-lobjet["LED"].removeobjet('PIR')
+#lobjet["LED"].removeobjet('PIR')
+
+
 
 
 for objet in lobjet.values():
     objetname = objet.getname()
     print("********" + objetname + "**********")
-    print(objet.getobjet())
+    print(objet.getallobjet())
+    print(objet.getallrules())
+    print("-------------------")
     for param in lobjet[objetname].getallparam():
+        print(param)
         print(lobjet[objetname].getparamvalue(param))
         print(lobjet[objetname].getparamJSONfilename(param))
+    print("--------------------")
+    for rule in lobjet[objetname].getallrules():
+        print(rule)
+        print(lobjet[objetname].isSetRule(rule))
+
 
 
 
