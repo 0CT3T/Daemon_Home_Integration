@@ -17,6 +17,8 @@ Ce projet est écrit en python et utilise la puissance du framework Django.
 API
 ===
 
+.. image:: UML.png
+
 L'API va permettre d'accèder à tous les modules de l'objet. 
 Elle est située dans le dossier daemon car essentiel à celui-ci.
 Elle se configure automatiquement et permet un ajout ultra rapide d'un nouveau module dans notre objet à l'aide de fichier de configuration.
