@@ -5,12 +5,16 @@ class driver_PIR():
 
     def __init__(self):
 
-        pir_pin = 23 # pin 23
-
-        io.setup(pir_pin, io.IN)         # activate input
+        self.pir_pin = 18 # pin 23
+        io.setmode(io.BCM)
+        io.setup(self.pir_pin, io.IN)         # activate input
 
 
 
     def get(self):
-        return io.input(self.pir_pin)
+        print (io.input(self.pir_pin))
+        if io.input(self.pir_pin):
+            return True
+        else:
+            return False
 

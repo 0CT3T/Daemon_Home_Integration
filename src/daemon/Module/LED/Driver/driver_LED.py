@@ -5,7 +5,7 @@ class driver_LED():
 
     def __init__(self):
 
-        pwmPin = 18 # pin 18 pwm
+        pwmPin = 12 # pin 18 pwm
 
 
         GPIO.setmode(GPIO.BCM)

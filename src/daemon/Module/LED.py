@@ -1,5 +1,5 @@
 from daemon.Module.Abstract.Hardware import Hardware
-
+from daemon.Configuration.Modele import *
 from importlib.machinery import SourceFileLoader
 
 

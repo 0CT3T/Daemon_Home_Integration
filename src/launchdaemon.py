@@ -12,7 +12,8 @@ from daemon.initialisation import *
 #lobjet["LED"].setRule("Allumer")
 
 lobjet["PIR"].addobjet(lobjet["LED"])
-lobjet["PIR"].setRule("Detection")
+lobjet["LED"].addobjet(lobjet["PIR"])
+#lobjet["PIR"].setRule("Detection")
 
 
 try:

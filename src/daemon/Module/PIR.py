@@ -1,5 +1,5 @@
 from daemon.Module.Abstract.Hardware import Hardware
-
+from daemon.Configuration.Modele import *
 from importlib.machinery import SourceFileLoader
 
 
@@ -12,7 +12,7 @@ class PIR(Hardware):
     def __init__(self):
         super().__init__()
 
-        temp = getattr(SourceFileLoader("driver_LED",Moduledirectory + self.getname() + "/Driver/driver_LED.py").load_module(), "driver_LED")
+        temp = getattr(SourceFileLoader("driver_PIR",Moduledirectory + self.getname() + "/Driver/driver_PIR.py").load_module(), "driver_PIR")
         self.driver = temp()
 
 
@@ -26,10 +26,10 @@ class PIR(Hardware):
 
     def run(self):
         super().run()
-        #print(self.getparamvalue("Mode"))
+        print(self.getparamvalue("Detect"))
         if self.driver.get():
             self.setparamvalue("Detect","SOMETHING")
-        else
+        else:
             self.setparamvalue("Detect","NOTHING")
 
 
