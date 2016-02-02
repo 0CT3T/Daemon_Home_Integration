@@ -12,8 +12,8 @@ class LED(Hardware):
     def __init__(self):
         super().__init__()
 
-        #temp = getattr(SourceFileLoader("driver_LED",Moduledirectory + self.getname() + "/Driver/driver_LED.py").load_module(), "driver_LED")
-        #self.driver = temp()
+        temp = getattr(SourceFileLoader("driver_LED",Moduledirectory + self.getname() + "/Driver/driver_LED.py").load_module(), "driver_LED")
+        self.driver = temp()
 
 
     #####################
@@ -26,13 +26,13 @@ class LED(Hardware):
         super().run()
 
 
-        print(self.getparamvalue("Mode"))
-        #if self.getparamvalue("Mode") == "ALLUMER":
-        #    self.driver.allumer(100)
-        #if self.getparamvalue("Mode") == "ETEINTE":
-        #    self.driver.stop()
-        #if self.getparamvalue("Mode") == "BLINKER":
-        #    self.driver.blink(20,20)
+        #print(self.getparamvalue("Mode"))
+        if self.getparamvalue("Mode") == "ALLUMER":
+            self.driver.allumer(self.getparamvalue("Opacity"))
+        if self.getparamvalue("Mode") == "ETEINTE":
+            self.driver.stop()
+        if self.getparamvalue("Mode") == "BLINKER":
+            self.driver.blink(self.getparamvalue("Frequency"),self.getparamvalue("Opacity"))
 
 
 

@@ -12,13 +12,6 @@ class driver_LED():
         GPIO.setup(pwmPin, GPIO.OUT)
         self.pwm = GPIO.PWM(pwmPin, 100)
 
-        #t1 = threading.Thread(target=self.function)
-        #t1.start()
-
-
-    def function(self):
-        while 1:
-            pass
 
 
     def allumer(self,opacite):
