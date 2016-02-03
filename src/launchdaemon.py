@@ -13,6 +13,7 @@ from daemon.initialisation import *
 
 lobjet["PIR"].addobjet(lobjet["LED"])
 lobjet["LED"].addobjet(lobjet["PIR"])
+lobjet["HP"].addobjet(lobjet["LED"])
 #lobjet["PIR"].setRule("Detection")
 
 
