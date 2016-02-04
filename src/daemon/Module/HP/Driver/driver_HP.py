@@ -4,15 +4,15 @@ import os
 class driver_HP():
 
     def __init__(self):
-        pass
-
-
-
-
+        os.system('./daemon/Module/HP/Driver/testcode &')
+        with open('test','w') as fichier:
+            fichier.write('2')
 
     def alarme(self):
-        os.system('./alarme')
+        with open('test','w') as fichier:
+            fichier.write('1')
 
     def stop(self):
-        os.system('./stop')
+        with open('test','w') as fichier:
+            fichier.write('2')
 

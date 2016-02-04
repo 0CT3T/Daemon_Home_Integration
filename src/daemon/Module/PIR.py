@@ -26,7 +26,7 @@ class PIR(Hardware):
 
     def run(self):
         super().run()
-        print(self.getparamvalue("Detect"))
+        #print(self.getparamvalue("Detect"))
         if self.driver.get():
             self.setparamvalue("Detect","SOMETHING")
         else:
